@@ -25,7 +25,7 @@ export const authenticate = (email, password, title, history) => {
    }).then( res => res.json() )
      .then( user => {
        dispatch(currentUser(user))
-       history.push('/dashboard')
+       history.replace('/dashboard')
      })
   }
 }
