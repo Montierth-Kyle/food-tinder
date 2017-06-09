@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header, Form, Button, Grid, Container, Icon, Segment, Divider } from 'semantic-ui-react';
+import { Header, Form, Button, Grid, Container, Icon, Segment, Divider, Image, Modal } from 'semantic-ui-react';
 import { authenticate } from '../actions/user';
 import { connect } from 'react-redux';
 
@@ -32,41 +32,43 @@ class Auth extends React.Component {
     let { title } = this.props;
     let { email, password } = this.state;
     return (
-      <div style={{height: "500px"}}>
-        <Container>
-            <Grid columns={16} relaxed centered>
-                <Grid.Column width={4}></Grid.Column>        
-                <Grid.Column width={5} verticalAlign="middle">
-                    <Form onSubmit={this.handleSubmit}>
-                        <Form.Input
-                            id="email"
-                            label="Email"
-                            required
-                            type="email"
-                            onChange={this.handleChange}
-                            value={email}
-                        />
-                        <Form.Input
-                             id="password"
-                            label="Password"
-                            required
-                            type="password"
-                            onChange={this.handleChange}
-                            value={password}
-                        />
-                    </Form>
-                    <br />
-                    <Button color="blue" >Submit</Button>
-                </Grid.Column>
-                <Grid.Column width={1}>
-                    <Divider vertical></Divider>
-                </Grid.Column>
-                <Grid.Column width={2} verticalAlign="middle">
-                    <Button content='Sign Up' icon="shopping basket" color="green" >Sign Up</Button>
-                </Grid.Column>
-                <Grid.Column width={4}></Grid.Column>
-            </Grid>
-        </Container>  
+      <div>
+        <Modal open>
+            <Modal.Content>
+                <Grid columns={16} relaxed centered>
+                    <Grid.Column width={2}></Grid.Column>
+                    <Grid.Column width={5} verticalAlign="middle">
+                        <Form onSubmit={this.handleSubmit}>
+                            <Form.Input
+                                id="email"
+                                label="Email"
+                                required
+                                type="email"
+                                onChange={this.handleChange}
+                                value={email}
+                            />
+                            <Form.Input
+                                id="password"
+                                label="Password"
+                                required
+                                type="password"
+                                onChange={this.handleChange}
+                                value={password}
+                            />
+                        </Form>
+                        <br />
+                        <Button color="blue" icon="checkmark" ><Icon name='checkmark' /> Submit</Button>
+                    </Grid.Column>
+                    <Grid.Column width={2}>
+                        <Divider vertical>OR</Divider>
+                    </Grid.Column>
+                    <Grid.Column width={5} verticalAlign="middle">
+                            <Button content='Sign Up' icon="user plus" color="green" ><Icon name='user plus' /> Sign Up</Button>
+                    </Grid.Column>
+                    <Grid.Column width={2}></Grid.Column>
+                </Grid> 
+            </Modal.Content>
+        </Modal>
       </div>
     )
   }

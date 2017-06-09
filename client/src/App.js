@@ -12,7 +12,7 @@ const App = () => (
   <div>
     <FetchUser>
       <Switch>
-        <Route exact path="/" component={Home} />
+        <Route exact path="/" render={ (props) => <Login {...props} title="Login" /> } />
         <Route path="/about" component={About} />
         <ProtectedRoute path="/dashboard" component={Dashboard} />
         <Route path="/register" render={ (props) => <Auth {...props} title="Register" /> } />
