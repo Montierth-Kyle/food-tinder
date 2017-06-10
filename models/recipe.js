@@ -6,7 +6,9 @@ const Recipe = new Schema({
   userId: { type : String, required : true },
   recipeId: { type : String },
   recipeName: { type: String },
-  recipeImageUrl: { type: String }
+  recipeImageUrl: { type: String },
+  cooked: { type: Boolean, default: false }
+
 });
 
 User.plugin(passportLocalMongoose);
