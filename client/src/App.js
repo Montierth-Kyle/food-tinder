@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import Home from './components/Home';
 import About from './components/About';
 import Auth from './components/Auth';
 import Login from './components/Login';
@@ -12,11 +11,11 @@ const App = () => (
   <div>
     <FetchUser>
       <Switch>
-        <Route exact path="/" render={ (props) => <Login {...props} title="Login" /> } />
+        <Route exact path="/" render={ (props) => <Login {...props} title="Welcome" /> } />
         <Route path="/about" component={About} />
         <ProtectedRoute path="/dashboard" component={Dashboard} />
         <Route path="/register" render={ (props) => <Auth {...props} title="Register" /> } />
-        <Route path="/login" render={ (props) => <Login {...props} title="Login" /> } />
+        <Route path="/login" render={ (props) => <Login {...props} title="Welcome" /> } />
      </Switch>
    </FetchUser>
   </div>

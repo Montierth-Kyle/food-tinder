@@ -1,9 +1,11 @@
 import React from 'react';
-import { Header, Form, Button, Grid, Container, Icon, Segment, Divider, Image, Modal } from 'semantic-ui-react';
+import { Header, Form, Button, Grid, Icon, Divider, Menu, Modal } from 'semantic-ui-react';
 import { authenticate } from '../actions/user';
 import { connect } from 'react-redux';
+import { NavLink } from 'react-router-dom';
+import '../styles/main.css';
 
-class Auth extends React.Component {
+class Login extends React.Component {
   defaults = { email: '', password: '' }
   state = { ...this.defaults }
 
@@ -19,15 +21,6 @@ class Auth extends React.Component {
     dispatch(authenticate(email, password, title, history))
   }
 
-  loginStyles = {
-    margin: "auto",
-    position: "absolute",
-    top: "0", left: "0", bottom: "0", right: "0",
-    width: "50%",
-    height: "50%",
-    padding: "40px"
-  }
-
   render() {
     let { title } = this.props;
     let { email, password } = this.state;
@@ -35,38 +28,43 @@ class Auth extends React.Component {
       <div>
         <Modal open>
             <Modal.Content>
-                <Grid columns={16} relaxed centered>
-                    <Grid.Column width={2}></Grid.Column>
-                    <Grid.Column width={5} verticalAlign="middle">
-                        <Form onSubmit={this.handleSubmit}>
-                            <Form.Input
-                                id="email"
-                                label="Email"
-                                required
-                                type="email"
-                                onChange={this.handleChange}
-                                value={email}
-                            />
-                            <Form.Input
-                                id="password"
-                                label="Password"
-                                required
-                                type="password"
-                                onChange={this.handleChange}
-                                value={password}
-                            />
-                        </Form>
-                        <br />
-                        <Button color="blue" icon="checkmark" ><Icon name='checkmark' /> Submit</Button>
-                    </Grid.Column>
-                    <Grid.Column width={2}>
-                        <Divider vertical>OR</Divider>
-                    </Grid.Column>
-                    <Grid.Column width={5} verticalAlign="middle">
-                            <Button content='Sign Up' icon="user plus" color="green" ><Icon name='user plus' /> Sign Up</Button>
-                    </Grid.Column>
-                    <Grid.Column width={2}></Grid.Column>
-                </Grid> 
+            <Grid columns={16} relaxed centered>
+                <Grid.Column width={4}></Grid.Column>        
+                <Grid.Column width={5} verticalAlign="middle">
+                    <Header as="h3">{title}</Header>
+                    <Form onSubmit={this.handleSubmit}>
+                        <Form.Input
+                            id="email"
+                            label="Email"
+                            required
+                            type="email"
+                            onChange={this.handleChange}
+                            value={email}
+                        />
+                        <Form.Input
+                             id="password"
+                            label="Password"
+                            required
+                            type="password"
+                            onChange={this.handleChange}
+                            value={password}
+                        />
+                    <br />
+                    <Button color="blue" ><Icon name='checkmark' /> Submit</Button>
+                    </Form>
+                </Grid.Column>
+                <Grid.Column width={1}>
+                    <Divider vertical>OR</Divider>
+                </Grid.Column>
+                <Grid.Column width={2} verticalAlign="middle">
+                    <Menu.Item>
+                    <NavLink to='/register'>
+                <Button color="green" ><Icon name='user plus' /> Sign Up</Button>
+             </NavLink>
+                    </Menu.Item>
+                </Grid.Column>
+                <Grid.Column width={4}></Grid.Column>
+            </Grid>
             </Modal.Content>
         </Modal>
       </div>
@@ -74,4 +72,4 @@ class Auth extends React.Component {
   }
 }
 
-export default connect()(Auth);
+export default connect()(Login);
