@@ -15,6 +15,7 @@ const app = express();
 //AUTH CONTROLLER
 const auth = require('./routes/auth');
 const recipes = require('./routes/recipes');
+const dietPreferences = require('./routes/dietPreferences');
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -45,6 +46,7 @@ passport.deserializeUser(User.deserializeUser());
 //AUTH ROUTES
 app.use('/api/auth', auth);
 app.use('/api/recipes', recipes);
+app.use('/api/dietPreferences', dietPreferences )
 
 app.get('*', (request, response) => {
   response.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));

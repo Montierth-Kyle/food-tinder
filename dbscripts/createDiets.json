@@ -1,0 +1,7 @@
+db.diets.insertMany([
+{ _id: NumberInt(1), dietName: "Lacto vegetarian" },
+{ _id: NumberInt(2), dietName: "Ovo vegetarian" },
+{ _id: NumberInt(3), dietName: "Pescetarian" },
+{ _id: NumberInt(4), dietName: "Vegan" },
+{ _id: NumberInt(5), dietName: "Vegetarian" }
+])

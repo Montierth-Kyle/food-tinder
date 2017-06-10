@@ -3,10 +3,10 @@ const Schema = mongoose.Schema;
 const passportLocalMongoose = require('passport-local-mongoose');
 
 const Diet = new Schema({
-  dietId: { type : Number, unique : true },
+  _id: { type : Number, unique : true },
   dietName: { type : String, unique : true, required : true, dropDups: true }
 });
 
-User.plugin(passportLocalMongoose);
+Diet.plugin(passportLocalMongoose);
 
 module.exports = mongoose.model( 'Diet', Diet );
