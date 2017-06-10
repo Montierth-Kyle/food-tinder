@@ -4,10 +4,9 @@ const passportLocalMongoose = require('passport-local-mongoose');
 
 const User = new Schema({
   email: { type : String, unique : true, required : true, dropDups: true },
-  password: { type : String },
-  firstName: { type: String, required: true },
-  lastName: { type: String, required: true },
-  dietPreferences: { type: Array, required: true }
+  firstName: { type : String },
+  lastName: { type : String },
+  dietId: { type : Number }
 });
 
 User.plugin(passportLocalMongoose);
