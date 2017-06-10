@@ -7,7 +7,8 @@ const Recipe = new Schema({
   recipeId: { type : String },
   recipeName: { type: String },
   recipeImageUrl: { type: String },
-  cooked: { type: Boolean, default: false }
+  cooked: { type: Boolean, default: false },
+  superSave: { type: Boolean, default: false }
 
 });
 
