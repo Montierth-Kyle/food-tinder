@@ -17,11 +17,8 @@ const isAuthenticated = (req, res, next) => {
 
 router.post('/signup', (req, res) => {
   let { email, password, firstName, lastName } = req.body;
-<<<<<<< HEAD
+
   User.register(new User({ username: email, firstName, lastName }), password, (err, user) => {
-=======
-  User.register(new User({ username: email, firstName, lastName }), password, (err, user) => {
->>>>>>> c52bbd5b6b2af6c27f9ac31f3515d965e91f7280
     if (err)
       return res.status(500).json(err);
 
