@@ -12,6 +12,6 @@ const Recipe = new Schema({
 
 });
 
-User.plugin(passportLocalMongoose);
+Recipe.plugin(passportLocalMongoose);
 
 module.exports = mongoose.model( 'Recipe', Recipe );
