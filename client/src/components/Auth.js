@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header, Form, Button, Container } from 'semantic-ui-react';
+import { Header, Form, Button, Modal } from 'semantic-ui-react';
 import { createUser } from '../actions/user';
 import { connect } from 'react-redux';
 import '../styles/main.css';
@@ -26,7 +26,8 @@ class Auth extends React.Component {
     let { email, password, firstName, lastName, } = this.state;
     return (
       <div> 
-        <Container className='signForm'> 
+        <Modal open>
+            <Modal.Content> 
             <Header as="h3">{title}</Header>
             <Form className='signForm' onSubmit={this.handleSubmit}>
               <Form.Input
@@ -64,7 +65,8 @@ class Auth extends React.Component {
               <hr />
               <Button color="green" >Sign Up</Button>
             </Form>
-          </Container>
+          </Modal.Content>
+        </Modal>
       </div>
     )
   }

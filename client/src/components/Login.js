@@ -30,7 +30,7 @@ class Login extends React.Component {
             <Modal.Content>
             <Grid columns={16} relaxed centered>
                 <Grid.Column width={4}></Grid.Column>        
-                <Grid.Column width={5} verticalAlign="middle">
+                <Grid.Column width={4} verticalAlign="middle">
                     <Header as="h3">{title}</Header>
                     <Form onSubmit={this.handleSubmit}>
                         <Form.Input
@@ -56,7 +56,7 @@ class Login extends React.Component {
                 <Grid.Column width={1}>
                     <Divider vertical>OR</Divider>
                 </Grid.Column>
-                <Grid.Column width={2} verticalAlign="middle">
+                <Grid.Column width={3} verticalAlign="middle">
                     <Menu.Item>
                     <NavLink to='/register'>
                 <Button color="green" ><Icon name='user plus' /> Sign Up</Button>
