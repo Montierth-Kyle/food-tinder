@@ -4,8 +4,8 @@ const User = require('../models/user');
 const passport = require('passport');
 
 const userAttrs = (user) => {
-  const { _id, username, role } = user;
-  return { _id, username, role };
+  const { _id, email, password, firstName, lastName} = user;
+  return { _id, email, password, firstName, lastName };
 }
 
 const isAuthenticated = (req, res, next) => {
@@ -16,8 +16,8 @@ const isAuthenticated = (req, res, next) => {
 }
 
 router.post('/signup', (req, res) => {
-  let { email, password } = req.body;
-  User.register(new User({username: email}), password, (err, user) => {
+  let { email, password, firstName, lastName } = req.body;
+  User.register(new User({email, firstName, lastName }), password, (err, user) => {
     if (err)
       return res.status(500).json(err);
 
@@ -31,7 +31,7 @@ router.post('/signup', (req, res) => {
 
 router.post('/signin', (req, res) => {
  let { email, password } = req.body
- User.findOne({ username: req.body.email}, (err, user) => {
+ User.findOne({ email: req.body.email}, (err, user) => {
    user.authenticate(req.body.password, (err, user, passwordErr) => {
      if (err)
        return res.json(500, 'User not found');
