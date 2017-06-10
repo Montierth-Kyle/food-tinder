@@ -1,6 +1,6 @@
 import React from 'react';
-import { Header, Form, Button, Grid, Container, Icon, Segment, Divider, Checkbox } from 'semantic-ui-react';
-import { authenticate } from '../actions/user';
+import { Header, Form, Button, Container } from 'semantic-ui-react';
+import { createUser } from '../actions/user';
 import { connect } from 'react-redux';
 import '../styles/main.css';
 
@@ -18,7 +18,7 @@ class Auth extends React.Component {
     e.preventDefault();
     let { title, history, dispatch } = this.props;
     let { email, password, firstName, lastName, } = this.state;
-    dispatch(authenticate(email, password, firstName,lastName, title, history))
+    dispatch(createUser(email, password, firstName,lastName, title, history))
   }
 
   render() {

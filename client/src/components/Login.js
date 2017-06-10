@@ -1,13 +1,9 @@
 import React from 'react';
-import { Header, Form, Button, Grid, Container, Icon, Segment, Divider, Menu, Modal } from 'semantic-ui-react';
+import { Header, Form, Button, Grid, Icon, Divider, Menu, Modal } from 'semantic-ui-react';
 import { authenticate } from '../actions/user';
 import { connect } from 'react-redux';
-import { NavLink, withRouter } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import '../styles/main.css';
-
-const unAuthenticatedLinks = [
-  { name: 'Register', path: '/register' },
-]
 
 class Login extends React.Component {
   defaults = { email: '', password: '' }

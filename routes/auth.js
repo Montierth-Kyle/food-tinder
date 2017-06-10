@@ -4,8 +4,8 @@ const User = require('../models/user');
 const passport = require('passport');
 
 const userAttrs = (user) => {
-  const { _id, username, firstName, lastName, role } = user;
-  return { _id, username, firstName, lastName, role };
+  const { _id, username, firstName, lastName } = user;
+  return { _id, username, firstName, lastName};
 }
 
 const isAuthenticated = (req, res, next) => {
@@ -17,7 +17,7 @@ const isAuthenticated = (req, res, next) => {
 
 router.post('/signup', (req, res) => {
   let { email, password, firstName, lastName } = req.body;
-  User.register(new User({email, firstName, lastName}), password, (err, user) => {
+  User.register(new User({username: email, firstName, lastName}), password, (err, user) => {
     if (err)
       return res.status(500).json(err);
 

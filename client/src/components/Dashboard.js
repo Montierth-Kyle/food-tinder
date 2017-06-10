@@ -2,10 +2,10 @@ import React from 'react';
 import { Header } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 
-const Dashboard = ({ lastName, firstName }) => (
+const Dashboard = ({ firstName }) => (
   <div>
-    <Header as="h2">{firstName}</Header>
-    <Header as="h3">{lastName}</Header>
+    <Header as="h2">Welcome</Header>
+    <Header as="h3">{firstName}</Header>
   </div>
 )
 

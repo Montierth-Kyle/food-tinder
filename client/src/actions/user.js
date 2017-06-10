@@ -11,7 +11,26 @@ const currentUser = (user = {}) => {
   return { type: 'USER', user }
 }
 
-export const authenticate = (email, password, firstName, lastName, title, history) => {
+export const createUser = (email, password, firstName, lastName, title, history) => {
+  return (dispatch) => {
+    let endpoint = title === 'Register' ? 'signup' : 'signin';
+    fetch(`/api/auth/${endpoint}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      credentials: 'include',
+      method: 'POST',
+      body: JSON.stringify({ email, password, firstName, lastName })
+   }).then( res => res.json() )
+     .then( user => {
+       dispatch(currentUser(user))
+       history.replace('/dashboard')
+     })
+  }
+}
+
+export const authenticate = (email, password, title, history) => {
   return (dispatch) => {
     let endpoint = title === 'Register' ? 'signup' : 'signin';
     fetch(`/api/auth/${endpoint}`, {
