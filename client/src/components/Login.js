@@ -1,9 +1,15 @@
 import React from 'react';
-import { Header, Form, Button, Grid, Container, Icon, Segment, Divider } from 'semantic-ui-react';
+import { Header, Form, Button, Grid, Container, Icon, Segment, Divider, Menu, Modal } from 'semantic-ui-react';
 import { authenticate } from '../actions/user';
 import { connect } from 'react-redux';
+import { NavLink, withRouter } from 'react-router-dom';
+import '../styles/main.css';
 
-class Auth extends React.Component {
+const unAuthenticatedLinks = [
+  { name: 'Register', path: '/register' },
+]
+
+class Login extends React.Component {
   defaults = { email: '', password: '' }
   state = { ...this.defaults }
 
@@ -19,24 +25,17 @@ class Auth extends React.Component {
     dispatch(authenticate(email, password, title, history))
   }
 
-  loginStyles = {
-    margin: "auto",
-    position: "absolute",
-    top: "0", left: "0", bottom: "0", right: "0",
-    width: "50%",
-    height: "50%",
-    padding: "40px"
-  }
-
   render() {
     let { title } = this.props;
     let { email, password } = this.state;
     return (
-      <div style={{height: "500px"}}>
-        <Container>
+      <div>
+        <Modal open>
+            <Modal.Content>
             <Grid columns={16} relaxed centered>
                 <Grid.Column width={4}></Grid.Column>        
                 <Grid.Column width={5} verticalAlign="middle">
+                    <Header as="h3">{title}</Header>
                     <Form onSubmit={this.handleSubmit}>
                         <Form.Input
                             id="email"
@@ -54,22 +53,27 @@ class Auth extends React.Component {
                             onChange={this.handleChange}
                             value={password}
                         />
-                    </Form>
                     <br />
-                    <Button color="blue" >Submit</Button>
+                    <Button color="blue" ><Icon name='checkmark' /> Submit</Button>
+                    </Form>
                 </Grid.Column>
                 <Grid.Column width={1}>
-                    <Divider vertical></Divider>
+                    <Divider vertical>OR</Divider>
                 </Grid.Column>
                 <Grid.Column width={2} verticalAlign="middle">
-                    <Button content='Sign Up' icon="shopping basket" color="green" >Sign Up</Button>
+                    <Menu.Item>
+                    <NavLink to='/register'>
+                <Button color="green" ><Icon name='user plus' /> Sign Up</Button>
+             </NavLink>
+                    </Menu.Item>
                 </Grid.Column>
                 <Grid.Column width={4}></Grid.Column>
             </Grid>
-        </Container>  
+            </Modal.Content>
+        </Modal>
       </div>
     )
   }
 }
 
-export default connect()(Auth);
+export default connect()(Login);
