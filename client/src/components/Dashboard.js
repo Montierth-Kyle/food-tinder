@@ -1,37 +1,55 @@
 import React from 'react';
-import { Modal, Button, Dropdown, Grid, Container } from 'semantic-ui-react';
+import { Modal, Button, Dropdown, Grid, Container, Card } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { getDietPreference } from '../actions/dietPreference'
+import { getDietPreference, setDietPreference } from '../actions/dietPreference'
+import Game from './Game'
+import { getRecipe } from '../actions/recipe'
 
 
 class Dashboard extends React.Component {
   
-  defaults = { gameStarted: false, value: "" }
+  defaults = { viewHistory: false, gameStarted: false, value: "" }
   state = { ...this.defaults }
 
   componentDidMount() {
-    let { dietPreferences, dispatch } = this.props;
-      dispatch(getDietPreference())
-    }
+    let { dietPreference, dispatch } = this.props;
+      dispatch(getDietPreference());
+  }
 
   startGame = () => {
     this.setState({ gameStarted: true })
   }
 
+  showHistory = () => {
+    this.setState({ viewHistory: true })
+  }
+
   displayDietPreferences = () => {
-  return this.props.dietPreferences.map(diet => {
-    return {  id: diet._id, text: diet.dietName, value: diet.dietName }
+  return this.props.dietPreference.map(diet => {
+    return {  id: diet.id, text: diet.name, value: diet.id }
   })
   }
 
-  handleChange = (e, { value }) => this.setState({ value });
+  handleChange = (e, { value }) => { 
+    this.setState({value});
+    this.props.dispatch(setDietPreference(value))
+  };
 
 
   render() {
-
-    return (
-        <div>
+    if (this.state.gameStarted === true && this.state.viewHistory === false) {
+      return (
+        <Game />
+      );
+    } else if (this.state.viewHistory === true && this.state.gameStarted === false) {
+        return (
+          <Container>
+            History
+          </Container>
+      );
+    } else {
+        return (
           <Container>
             <Grid columns={2}>
               <Grid.Column>
@@ -39,15 +57,17 @@ class Dashboard extends React.Component {
                 <Dropdown placeholder='Diet Preferences' value={this.state.value} fluid selection options={this.displayDietPreferences()} onChange={this.handleChange} />
               </Grid.Column>
               <Grid.Column>
-                <Button inverted color='red'>History</Button>
+                <Button inverted color='red' onClick={this.showHistory} >History</Button>
               </Grid.Column>
             </Grid>
           </Container>
-        </div>
-    )
-  }};
+      );
+    }
+  };
+}                
 
 const mapStateToProps = (state) => {
-  return { dietPreferences: state.dietPreference }
+  const { dietPreference: { dietPreference , id } } = state;
+  return { dietPreference, id }
 }
 export default connect(mapStateToProps)(Dashboard);

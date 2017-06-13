@@ -1,7 +1,9 @@
-const dietPreference = (state = [], action) => {
+const dietPreference = (state = { dietPreference: [], id: null }, action) => {
   switch(action.type) {
     case 'DIETPREFERENCE':
-      return action.dietPreference
+      return { ...state, dietPreference: action.dietPreference }
+    case 'SETDIETPREFERENCE':
+      return {...state, id: action.id }
     default:
       return state;
   }

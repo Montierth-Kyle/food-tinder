@@ -1,23 +1,16 @@
 const express = require('express');
 const router = express.Router();
 const Recipe = require('../models/recipe');
+const Yummly = require('../node_modules/yummly-api/yummly.js');
+const yummly = new Yummly()
 
-router.post('/', (req, res) => {
-    let { recipeName, recipeImageURL } = req.body;
-    new Recipe({userId: req.user._id, recipeName, recipeImageURL}).save( (err, recipe) => {
-        if (err)
-            return res.status(500).json(err);
-        
-        return res.json(recipe);
-    });
-});
-
-router.get('/', (req, res) => {
-    Recipe.find({userId: req.user._id}, (err, recipes) => {
-        if (err)
-            return res.status(500).json(err);
-        
+router.get('/:id', (req, res) => {
+    yummly.setDiets(req.params.id);
+    yummly.setMaxResults(1)
+    yummly.getRecipes( recipes => {
+        console.log(recipes)
         return res.json(recipes);
+
     })
 });
 

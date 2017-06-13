@@ -11,8 +11,10 @@ export const getDietPreference = () => {
         console.log(error);
     });
   }
-}
+};
 
-const currentUser = (user = {}) => {
-  return { type: 'USER', user }
+export const setDietPreference = id => {
+  return dispatch => {
+    dispatch({ type: 'SETDIETPREFERENCE', id })
+  }
 }
