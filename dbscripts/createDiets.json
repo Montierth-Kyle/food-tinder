@@ -1,3 +1,6 @@
+//right click on Collections and create new called "diets"
+//the right click on diets and click "view documents" then paste in the following script
+
 db.diets.insertMany([
 { _id: NumberInt(1), dietName: "Lacto vegetarian" },
 { _id: NumberInt(2), dietName: "Ovo vegetarian" },
