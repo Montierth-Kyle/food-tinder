@@ -3,8 +3,7 @@ import axios from 'axios';
 export const getRecipes = (id) => {
   return (dispatch) => {
     axios.get(`/api/recipes/${id}`)
-        .then(function (res) {
-          console.log(res)
+        .then( (res) => {
         dispatch({ type: 'GETRECIPES', recipes: res.data })
     })
         .catch(function (error) {

@@ -3,12 +3,12 @@ import axios from 'axios';
 export const getDietPreference = () => {
   return (dispatch) => {
     axios.get('/api/dietPreferences')
-        .then(function (res) {
-        dispatch({ type: 'DIETPREFERENCE', dietPreference: res.data })
+      .then( (res) => {
+      dispatch({ type: 'DIETPREFERENCE', dietPreference: res.data })
     })
-        .catch(function (error) {
-          console.log("ERROR")
-        console.log(error);
+      .catch(function (error) {
+      console.log("ERROR")
+      console.log(error);
     });
   }
 };

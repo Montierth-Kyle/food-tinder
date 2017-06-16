@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Card, Container } from 'semantic-ui-react';
 import { getRecipes } from '../actions/recipe'
+import NavBar from './NavBar';
 
 
 class Game extends React.Component {
@@ -14,6 +15,7 @@ class Game extends React.Component {
     render() {
         return (
             <div>
+                <NavBar/>
                 <Card />
             </div>
         )

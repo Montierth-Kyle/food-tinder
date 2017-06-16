@@ -5,6 +5,7 @@ import { NavLink } from 'react-router-dom';
 import { getDietPreference, setDietPreference } from '../actions/dietPreference'
 import Game from './Game'
 import { getRecipe } from '../actions/recipe'
+import NavBar from './NavBar';
 
 
 class Dashboard extends React.Component {
@@ -45,6 +46,7 @@ class Dashboard extends React.Component {
     } else if (this.state.viewHistory === true && this.state.gameStarted === false) {
         return (
           <Container>
+            <NavBar/>
             History
           </Container>
       );

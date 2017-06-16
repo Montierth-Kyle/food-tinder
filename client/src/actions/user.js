@@ -1,9 +1,15 @@
-export const logout = () => {
+import axios from 'axios';
+
+export const logout = (history) => {
   return(dispatch) => {
-    fetch('/api/auth/sign_out', {
-      method: 'DELETE',
-      credentials: 'include',
-     }).then( () => dispatch(currentUser()) )
+    axios.delete('/api/auth/logout')
+      .then( () => {
+         dispatch(currentUser())
+      })
+      .catch( (err) => {
+        console.log("ERROR");
+        console.log(err);
+      })
   }
 }
 
@@ -14,48 +20,39 @@ const currentUser = (user = {}) => {
 export const createUser = (email, password, firstName, lastName, title, history) => {
   return (dispatch) => {
     let endpoint = title === 'Register' ? 'signup' : 'signin';
-    fetch(`/api/auth/${endpoint}`, {
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      credentials: 'include',
-      method: 'POST',
-      body: JSON.stringify({ email, password, firstName, lastName })
-   }).then( res => res.json() )
+    axios.post(`/api/auth/${endpoint}`, { email, password, firstName, lastName })
      .then( user => {
-       dispatch(currentUser(user))
+       dispatch(currentUser(user.data))
        history.replace('/dashboard')
      })
+      .catch((err) => {
+        console.log("ERROR");
+        console.log(err);
+      })
   }
 }
 
 export const authenticate = (email, password, title, history) => {
   return (dispatch) => {
     let endpoint = title === 'Register' ? 'signup' : 'signin';
-    fetch(`/api/auth/${endpoint}`, {
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      credentials: 'include',
-      method: 'POST',
-      body: JSON.stringify({ email, password })
-   }).then( res => res.json() )
-     .then( user => {
-       dispatch(currentUser(user))
+    axios.post(`/api/auth/${endpoint}`, { email, password } )
+      .then( user => {
+       dispatch(currentUser(user.data))
        history.replace('/dashboard')
      })
+      .catch((err) => {
+        console.log("ERROR");
+        console.log(err);
+      })
   }
 }
 
 export const tryFetchUser = (cb) => {
   return (dispatch) => {
-    fetch('/api/auth/user', {
-      method: 'GET',
-      credentials: 'include'
-    }).then( res => res.json() )
-      .then( user => dispatch(currentUser(user)) )
-      .then( () => cb() )
+    axios.get('/api/auth/user')
+      .then( user => {
+      dispatch(currentUser(user.data)) 
+    })
+      .then(() => cb())
   }
 }
