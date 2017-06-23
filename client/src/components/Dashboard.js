@@ -40,7 +40,7 @@ class Dashboard extends React.Component {
   render() {
     if (this.state.gameStarted === true && this.state.viewHistory === false) {
       return (
-        <Game />
+        <Game id={this.state.value} />
       );
     } else if (this.state.viewHistory === true && this.state.gameStarted === false) {
         return (
