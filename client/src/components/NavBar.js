@@ -11,6 +11,8 @@ const links = [
 
 const authenticatedLinks = [
   { name: 'Dashboard', path: '/dashboard' },
+  { name: 'Game', path: '/game'},
+  { name: 'Account', path: '/account' },
   { name: 'Logout' }
 ]
 

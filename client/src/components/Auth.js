@@ -34,6 +34,7 @@ class Auth extends React.Component {
                 id="firstName"
                 label="First Name"
                 required
+                icon="user circle"
                 type="text"
                 onChange={this.handleChange}
                 value={firstName}
@@ -42,6 +43,7 @@ class Auth extends React.Component {
                 id="lastName"
                 label="Last Name"
                 required
+                icon="user circle"
                 type="text"
                 onChange={this.handleChange}
                 value={lastName}
@@ -50,6 +52,7 @@ class Auth extends React.Component {
                 id="email"
                 label="Email"
                 required
+                icon="mail"
                 type="email"
                 onChange={this.handleChange}
                 value={email}
@@ -58,6 +61,7 @@ class Auth extends React.Component {
                 id="password"
                 label="Password"
                 required
+                icon="vcard"
                 type="password"
                 onChange={this.handleChange}
                 value={password}

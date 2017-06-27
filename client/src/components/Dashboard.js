@@ -2,9 +2,10 @@ import React from 'react';
 import { Modal, Button, Dropdown, Grid, Container, Card } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { getDietPreference, setDietPreference } from '../actions/dietPreference'
-import Game from './Game'
-import { getRecipe } from '../actions/recipe'
+import { getDietPreference, setDietPreference } from '../actions/dietPreference';
+import Account from './Account';
+import Game from './Game';
+import { getRecipe } from '../actions/recipe';
 import NavBar from './NavBar';
 
 
@@ -28,7 +29,7 @@ class Dashboard extends React.Component {
 
   displayDietPreferences = () => {
   return this.props.dietPreference.map(diet => {
-    return {  id: diet.id, text: diet.name, value: diet.id }
+    return {  key: diet.id, id: diet.id, text: diet.name, value: diet.id }
   })
   }
 
@@ -39,15 +40,15 @@ class Dashboard extends React.Component {
 
 
   render() {
-    if (this.state.gameStarted === true && this.state.viewHistory === false) {
+    if (this.state.gameStarted && !this.state.viewHistory ) {
       return (
         <Game />
       );
-    } else if (this.state.viewHistory === true && this.state.gameStarted === false) {
+    } else if (this.state.viewHistory && !this.state.gameStarted ) {
         return (
           <Container>
             <NavBar/>
-            History
+            <Account/>
           </Container>
       );
     } else {

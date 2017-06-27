@@ -8,7 +8,7 @@ export const logout = (history) => {
       })
       .catch( (err) => {
         console.log("ERROR");
-        console.log(err);
+        console.log(err.response);
       })
   }
 }
@@ -27,7 +27,7 @@ export const createUser = (email, password, firstName, lastName, title, history)
      })
       .catch((err) => {
         console.log("ERROR");
-        console.log(err);
+        console.log(err.response);
       })
   }
 }
@@ -42,7 +42,7 @@ export const authenticate = (email, password, title, history) => {
      })
       .catch((err) => {
         console.log("ERROR");
-        console.log(err);
+        console.log(err.response);
       })
   }
 }

@@ -18,7 +18,7 @@ class Login extends React.Component {
     e.preventDefault();
     let { title, history, dispatch } = this.props;
     let { email, password } = this.state;
-    dispatch(authenticate(email, password, title, history))
+    dispatch(authenticate( email, password, title, history))
   }
 
   render() {
@@ -35,16 +35,19 @@ class Login extends React.Component {
                     <Form onSubmit={this.handleSubmit}>
                         <Form.Input
                             id="email"
-                            label="Email"
+                            label='Email'
                             required
+                            icon='mail'
                             type="email"
                             onChange={this.handleChange}
                             value={email}
                         />
+                        
                         <Form.Input
                              id="password"
                             label="Password"
                             required
+                            icon="vcard"
                             type="password"
                             onChange={this.handleChange}
                             value={password}

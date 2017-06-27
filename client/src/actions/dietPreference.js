@@ -6,9 +6,9 @@ export const getDietPreference = () => {
       .then( (res) => {
       dispatch({ type: 'DIETPREFERENCE', dietPreference: res.data })
     })
-      .catch(function (error) {
+      .catch(function (err) {
       console.log("ERROR")
-      console.log(error);
+      console.log(err.response);
     });
   }
 };

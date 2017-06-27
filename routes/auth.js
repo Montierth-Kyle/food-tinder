@@ -17,11 +17,9 @@ const isAuthenticated = (req, res, next) => {
 
 router.post('/signup', (req, res) => {
   let { email, password, firstName, lastName } = req.body;
-
   User.register(new User({ username: email, firstName, lastName }), password, (err, user) => {
     if (err)
       return res.status(500).json(err);
-
     user.save( (err, user) => {
       if (err)
         return res.status(500).json(err);
@@ -46,7 +44,7 @@ router.post('/signin', (req, res) => {
   });
 });
 
-router.get('/user', isAuthenticated, (req,res) => {
+router.get('/user', isAuthenticated, (req,res) => { 
   return res.json(req.user)
 });
 
