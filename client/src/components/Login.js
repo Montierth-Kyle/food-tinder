@@ -28,9 +28,8 @@ class Login extends React.Component {
       <div>
         <Modal open>
             <Modal.Content>
-            <Grid columns={16} relaxed centered>
-                <Grid.Column width={4}></Grid.Column>        
-                <Grid.Column width={4} verticalAlign="middle">
+            <Grid columns={16} relaxed centered>      
+                <Grid.Column width={10} verticalAlign="middle">
                     <Header as="h3">{title}</Header>
                     <Form onSubmit={this.handleSubmit}>
                         <Form.Input
@@ -53,20 +52,35 @@ class Login extends React.Component {
                             value={password}
                         />
                     <br />
-                    <Button color="blue" ><Icon name='checkmark' /> Submit</Button>
+                    <Button color="green" >
+                        <Icon name='checkmark' /> Submit
+                    </Button>
+                    <Divider hidden >Or Sign In With</Divider>
+                    <Divider hidden />
+                    <Button color='facebook'>
+                        <Icon name='facebook' /> Facebook
+                    </Button>
+                    <Button color='twitter'>
+                        <Icon name='twitter' /> Twitter
+                    </Button>
+                    <Button color='google plus'>
+                        <Icon name='google plus' /> Google Plus
+                    </Button>
+                    <Button color='linkedin'>
+                        <Icon name='linkedin' /> LinkedIn
+                    </Button>
                     </Form>
                 </Grid.Column>
                 <Grid.Column width={1}>
                     <Divider vertical>OR</Divider>
                 </Grid.Column>
-                <Grid.Column width={3} verticalAlign="middle">
+                <Grid.Column width={5} verticalAlign="middle">
                     <Menu.Item>
                     <NavLink to='/register'>
                 <Button color="green" ><Icon name='user plus' /> Sign Up</Button>
              </NavLink>
                     </Menu.Item>
                 </Grid.Column>
-                <Grid.Column width={4}></Grid.Column>
             </Grid>
             </Modal.Content>
         </Modal>

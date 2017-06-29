@@ -1,56 +1,69 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Card, Container, Divider, List, ListItem, Grid, Button, Image, Icon, Label } from 'semantic-ui-react';
-import { getRecipes, getOneRecipe } from '../actions/recipe'
+import { Card, Container, Divider, List, Grid, Button, Image, Icon, Label } from 'semantic-ui-react';
+import { getRecipes, getOneRecipe, deleteRecipe } from '../actions/recipe'
 import NavBar from './NavBar';
 
 
 class Account extends React.Component {
-    state = { show: 'Cooked' }
+    state = { show: 'Cooked', positive: true, disabled: true }
 
     componentWillMount() {
         this.props.dispatch(getRecipes())
     }
-    
+
+    handleDelete = (recipe) => {
+        this.props.dispatch(deleteRecipe(recipe))
+        this.props.dispatch(getRecipes())
+    }
 
     recipeHistory = () => {
         const cardLabelColor = this.state.show === 'Cooked' ? 'red' : 'teal'
         const cardLabelIcon = this.state.show === 'Cooked' ? 'spoon' : 'star'
         let { show } = this.state;
-        let { user, recipes, dispatch, id } = this.props;
+        let { recipes, dispatch, id } = this.props;
         let cookedRecipes = recipes.filter(recipe => recipe.cooked === true);
         let savedRecipes = recipes.filter(recipe => recipe.superSave === true);
         let filtered = this.state.show === 'Cooked' ? cookedRecipes : savedRecipes;
         return filtered.map( (recipe, i) => {
-            console.log(recipe.recipeImageUrl)
+            // console.log(recipe[i]._id)  
             return (
                 <Card raised>
-                    <Image 
+                    <Image
                         fluid
-                        label={{ as: 'a', color: cardLabelColor, content: show, icon: cardLabelIcon, ribbon: true }}
+                        label={{ color: cardLabelColor, content: show, icon: cardLabelIcon, ribbon: true }}
                         src={recipe.recipeImageUrl} />
                     <Card.Content>
                     <Card.Header>
                         {recipe.recipeName}
+                        <Button animated='fade' color='red' floated='right' onClick={() => this.handleDelete(recipe)}>
+                            <Button.Content hidden>Delete</Button.Content>
+                            <Button.Content visible>
+                                <Icon name='trash' />
+                            </Button.Content>
+                        </Button>
                     </Card.Header>
                     </Card.Content>
                 </Card> 
+                
             )
         })
     }
 
     displayRecipeHistory = () => {
         return this.props.recipes.map(recipe => {
-            return { id: recipe.id, text: recipe.recipeName, value: recipe.id, image: recipe.recipeImageURL }
+            return { id: recipe.id, text: recipe.recipeName, value: recipe.id, image: recipe.recipeImageUrl }
         })
     }
 
     toggleRecipeFilter = () => {
         this.setState({ show: this.state.show === "Cooked" ? "Saved" : "Cooked" });
+
     }
 
     render() {
-        const oppositeOfWhatIsCurrentlyShow = this.state.show ? "Saved" : "Cooked"
+        let { user, dispatch, id } = this.props;
+        let { positive, disabled } = this.state;
         return (
             <div>
                 <Grid columns={16}>
@@ -58,35 +71,39 @@ class Account extends React.Component {
                         <Card.Group itemsPerRow={2}>
                             {this.recipeHistory()}
                         </Card.Group>
-                        <Button onClick={this.toggleRecipeFilter}>Show {oppositeOfWhatIsCurrentlyShow}</Button>
                     </Grid.Column>
-                <Divider vertical />
+                    <Grid.Column width={1}>
+                        <Divider vertical></Divider>
+                    </Grid.Column>
                     <Grid.Column width={4}>
-                        <List relaxed>
+                        <List size='massive'>
                             <List.Item>
-                                <Image avatar src='/assets/images/avatar/small/daniel.jpg' />
+                                <List.Icon name='mail' size='big' />
                                 <List.Content>
-                                    <List.Header as='a'>Daniel Louise</List.Header>
-                                    <List.Description>Last seen watching <a><b>Arrested Development</b></a> just now.</List.Description>
+                                    <List.Header>Username:</List.Header>
+                                    <List.Description>{<a href='mailto: {user.username}'>{user.username}</a>}</List.Description>
                                 </List.Content>
                             </List.Item>
                             <List.Item>
-                                <Image avatar src='/assets/images/avatar/small/stevie.jpg' />
+                                <List.Icon name='user circle' size='big' />
                                 <List.Content>
-                                    <List.Header as='a'>Stevie Feliciano</List.Header>
-                                    <List.Description>Last seen watching <a><b>Bob's Burgers</b></a> 10 hours ago.</List.Description>
+                                    <List.Header>Name:</List.Header>
+                                    <List.Description>{user.firstName} {user.lastName}</List.Description>
                                 </List.Content>
                             </List.Item>
                             <List.Item>
-                                <Image avatar src='/assets/images/avatar/small/elliot.jpg' />
-                                <List.Content>
-                                    <List.Header as='a'>Elliot Fu</List.Header>
-                                    <List.Description>Last seen watching <a><b>The Godfather Part 2</b></a> yesterday.</List.Description>
-                                </List.Content>
+                                <List.Icon name='linkify' size='big' />
+                                <List.Content>{<a href='http://www.semantic-ui.com'>semantic-ui.com</a>}</List.Content>
                             </List.Item>
                         </List>
                     </Grid.Column>
                 </Grid >
+                <Divider hidden/>
+                <Button.Group>
+                    <Button {...this.state.show === "Cooked" ? { positive } : '' } onClick={this.setState({ show: 'Cooked' })}>Cooked</Button>
+                    <Button.Or />
+                    <Button {...this.state.show === "Saved" ? { positive } : '' } onClick={this.setState({ show: 'Saved' })}>Saved</Button>
+                </Button.Group>
             </div>
         )
     }

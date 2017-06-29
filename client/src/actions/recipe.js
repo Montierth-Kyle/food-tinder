@@ -16,8 +16,22 @@ export const getRecipes = () => {
 export const getOneRecipe = (id) => {
   return (dispatch) => {
     axios.get(`/api/recipes/${id}`)
-      .then((res) => {
+      .then( (res) => {
         dispatch({ type: 'GETONERECIPE', recipes: res.data })
+      })
+      .catch(function (err) {
+        console.log("ERROR")
+        console.log(err.response);
+      });
+  }
+}
+
+export const deleteRecipe = (recipe) => {
+  console.log(recipe);
+  return(dispatch) => {
+    axios.delete(`/api/recipes/deleteRecipe/${recipe._id}`)
+      .then( () => {
+        dispatch({ type: 'DELETERECIPE'})
       })
       .catch(function (err) {
         console.log("ERROR")

@@ -4,6 +4,8 @@ const recipe = (state = [], action) => {
       return action.recipes
     case 'GETONERECIPE':
       return action.recipes
+    case 'DELETERECIPE':
+      return action.recipes
     default:
       return state;
   }

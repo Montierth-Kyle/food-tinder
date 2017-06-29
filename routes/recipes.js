@@ -25,9 +25,22 @@ router.post('/saveRecipe', (req, res) => {
         if (err)
             return
     })
-})
+});
 
-//PUT needed if we decide to save the recipes as "saved" or "made" or something like that.
+router.delete('/deleteRecipe/:id', (req, res) => {
+    let recipeId  = req.params.id
+
+    Recipe.remove({
+        _id: recipeId
+    },
+    (err, recipe) => {
+        if(err){
+            return res.status(500).json()
+        }
+        return res.status(200).json()
+    }
+    )
+});
 
 //TODO: Delete recipe
 
