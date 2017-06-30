@@ -5,7 +5,7 @@ const recipe = (state = [], action) => {
     case 'GETONERECIPE':
       return action.recipes
     case 'DELETERECIPE':
-      return action.recipes
+      return state.filter(recipe => recipe._id !== action.id)
     default:
       return state;
   }

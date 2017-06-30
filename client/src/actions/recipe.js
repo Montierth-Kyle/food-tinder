@@ -31,7 +31,7 @@ export const deleteRecipe = (recipe) => {
   return(dispatch) => {
     axios.delete(`/api/recipes/deleteRecipe/${recipe._id}`)
       .then( () => {
-        dispatch({ type: 'DELETERECIPE'})
+        dispatch({ type: 'DELETERECIPE', id: recipe._id})
       })
       .catch(function (err) {
         console.log("ERROR")

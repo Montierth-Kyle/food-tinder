@@ -14,7 +14,6 @@ class Account extends React.Component {
 
     handleDelete = (recipe) => {
         this.props.dispatch(deleteRecipe(recipe))
-        this.props.dispatch(getRecipes())
     }
 
     recipeHistory = () => {
