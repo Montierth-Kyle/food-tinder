@@ -25,8 +25,7 @@ class Account extends React.Component {
         let cookedRecipes = recipes.filter(recipe => recipe.cooked === true);
         let savedRecipes = recipes.filter(recipe => recipe.superSave === true);
         let filtered = this.state.show === 'Cooked' ? cookedRecipes : savedRecipes;
-        return filtered.map( (recipe, i) => {
-            // console.log(recipe[i]._id)  
+        return filtered.map( (recipe, i) => {  
             return (
                 <Card raised>
                     <Image
@@ -91,18 +90,14 @@ class Account extends React.Component {
                                     <List.Description>{user.firstName} {user.lastName}</List.Description>
                                 </List.Content>
                             </List.Item>
-                            <List.Item>
-                                <List.Icon name='linkify' size='big' />
-                                <List.Content>{<a href='http://www.semantic-ui.com'>semantic-ui.com</a>}</List.Content>
-                            </List.Item>
                         </List>
                     </Grid.Column>
                 </Grid >
                 <Divider hidden/>
                 <Button.Group>
-                    <Button {...this.state.show === "Cooked" ? { positive } : '' } onClick={this.setState({ show: 'Cooked' })}>Cooked</Button>
+                    <Button {...this.state.show === "Cooked" ? { positive } : '' } onClick={() => this.setState({ show: 'Cooked' })}>Cooked</Button>
                     <Button.Or />
-                    <Button {...this.state.show === "Saved" ? { positive } : '' } onClick={this.setState({ show: 'Saved' })}>Saved</Button>
+                    <Button {...this.state.show === "Saved" ? { positive } : '' } onClick={() => this.setState({ show: 'Saved' })}>Saved</Button>
                 </Button.Group>
             </div>
         )

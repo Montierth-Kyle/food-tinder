@@ -7,6 +7,8 @@ db.recipes.insertMany([
     },
     {userId: ObjectId("593f2f476da47b47dc1b8b77"), recipeName: "Shit Burgers", recipeImageUrl: "http://cdn.ebaumsworld.com/mediaFiles/picture/1399182/81238552.jpg", cooked: true, superSave: false
     },
+    {userId: ObjectId("593f2f476da47b47dc1b8b77"), recipeName: "Shit Burgers", recipeImageUrl: "http://cdn.ebaumsworld.com/mediaFiles/picture/1399182/81238552.jpg", cooked: true, superSave: false
+    },
     {userId: ObjectId("593f2f476da47b47dc1b8b77"), recipeName: "Shit Burgers", recipeImageUrl: "http://cdn.ebaumsworld.com/mediaFiles/picture/1399182/81238552.jpg", cooked: false, superSave: true
     },
     {userId: ObjectId("593f2f476da47b47dc1b8b77"), recipeName: "Shit Burgers", recipeImageUrl: "http://cdn.ebaumsworld.com/mediaFiles/picture/1399182/81238552.jpg", cooked: false, superSave: true
