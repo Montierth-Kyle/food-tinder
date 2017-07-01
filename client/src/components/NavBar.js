@@ -13,7 +13,7 @@ const authenticatedLinks = [
   { name: 'Dashboard', path: '/dashboard' },
   { name: 'Game', path: '/game'},
   { name: 'Account', path: '/account' },
-  { name: 'Logout' }
+  { name: 'Logout' },
 ]
 
 const unAuthenticatedLinks = [
@@ -33,23 +33,23 @@ class NavBar extends React.Component {
           name={nav.name}
         >
           { nav.name === 'Logout' ?
-             <a
-               style={{ cursor: 'pointer' }}
-               onClick={ () => {
-                 dispatch(logout())
-                 history.push('/login')
-               }}
-             >
-               {nav.name}
-             </a>
-             :
-             <NavLink to={nav.path}>
-               {nav.name}
-             </NavLink>
-           }
-         </Menu.Item>
-       )
-     });
+              <a
+                style={{ cursor: 'pointer' }}
+                onClick={ () => {
+                  dispatch(logout())
+                  history.push('/login')
+                }}
+              >
+              {nav.name}
+              </a>
+              :
+              <NavLink to={nav.path}>
+                {nav.name}
+              </NavLink>
+          }
+          </Menu.Item>
+        )
+      });
   }
 
   render() {
@@ -60,14 +60,14 @@ class NavBar extends React.Component {
       navs = [...links, ...authenticatedLinks];
     } else {
       navs = [...links, ...unAuthenticatedLinks];
-  }
+      }
 
-  return (
-    <Menu>
-     { this.buildNavs(navs) }
-    </Menu>
-  )
- }
+    return (
+      <Menu>
+      { this.buildNavs(navs) }
+      </Menu>
+    )
+  }
 }
 
 const mapStateToProps = (state) => {

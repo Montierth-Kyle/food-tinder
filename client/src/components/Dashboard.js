@@ -60,7 +60,9 @@ class Dashboard extends React.Component {
                 <Dropdown placeholder='Diet Preferences' value={this.state.value} fluid selection options={this.displayDietPreferences()} onChange={this.handleChange} />
               </Grid.Column>
               <Grid.Column>
-                <Button inverted color='red' onClick={this.showHistory} >History</Button>
+                <Link to='/account'>
+                  <Button color='red'>History</Button>
+                </Link>
               </Grid.Column>
             </Grid>
           </Container>

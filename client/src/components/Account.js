@@ -64,6 +64,7 @@ class Account extends React.Component {
         let { positive, disabled } = this.state;
         return (
             <div>
+            <Container>
                 <Grid columns={16}>
                     <Grid.Column width={10}>
                         <Card.Group itemsPerRow={2}>
@@ -98,6 +99,7 @@ class Account extends React.Component {
                     <Button.Or />
                     <Button {...this.state.show === "Saved" ? { positive } : '' } onClick={() => this.setState({ show: 'Saved' })}>Saved</Button>
                 </Button.Group>
+            </Container>
             </div>
         )
     }
