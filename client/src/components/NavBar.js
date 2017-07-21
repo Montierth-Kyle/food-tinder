@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Menu } from 'semantic-ui-react';
+import { Menu, Dropdown } from 'semantic-ui-react';
 import { logout } from '../actions/user';
 
 const links = [
@@ -27,7 +27,8 @@ class NavBar extends React.Component {
     let { location, history, dispatch } = this.props;
     return navs.map( (nav, i) => {
       return (
-        <Menu.Item
+        <Dropdown.Item 
+          position='right'
           key={i}
           active={ nav.name !== 'Logout' && nav.path === location.pathname}
           name={nav.name}
@@ -47,7 +48,7 @@ class NavBar extends React.Component {
                 {nav.name}
               </NavLink>
           }
-          </Menu.Item>
+          </Dropdown.Item>
         )
       });
   }
@@ -63,8 +64,12 @@ class NavBar extends React.Component {
       }
 
     return (
-      <Menu>
-      { this.buildNavs(navs) }
+      <Menu secondary size='massive'>
+        <Dropdown item icon='content' simple>
+          <Dropdown.Menu >
+            { this.buildNavs(navs) }
+          </Dropdown.Menu>
+        </Dropdown>
       </Menu>
     )
   }

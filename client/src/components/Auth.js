@@ -1,8 +1,18 @@
 import React from 'react';
-import { Header, Form, Button, Modal } from 'semantic-ui-react';
+import { Header, Form, Button, Modal, Icon } from 'semantic-ui-react';
 import { createUser } from '../actions/user';
 import { connect } from 'react-redux';
 import '../styles/main.css';
+import background from '../images/mosaic_bg_medium.jpg';
+
+var sectionStyle = {
+  width: "100%",
+  height: "100%",
+  backgroundImage: `url(${background})`,
+  position: 'fixed',
+  top: '0',
+  left: '0'
+};
 
 
 class Auth extends React.Component {
@@ -25,11 +35,11 @@ class Auth extends React.Component {
     let { title } = this.props;
     let { email, password, firstName, lastName, } = this.state;
     return (
-      <div> 
-        <Modal open>
+      <div style={ sectionStyle }> 
+        <Modal dimmer={false} open>
             <Modal.Content> 
-            <Header as="h3">{title}</Header>
-            <Form className='signForm' onSubmit={this.handleSubmit}>
+            <Header textAlign='centered' as="h1" color='red' >{title}</Header>
+            <Form className='signForm' size='huge' onSubmit={this.handleSubmit}>
               <Form.Input
                 id="firstName"
                 label="First Name"
@@ -66,8 +76,9 @@ class Auth extends React.Component {
                 onChange={this.handleChange}
                 value={password}
               />
-              <hr />
-              <Button color="green" >Sign Up</Button>
+              <Button size='massive' fluid color="green" >
+                <Icon name='user plus' /> Sign Up
+              </Button>
             </Form>
           </Modal.Content>
         </Modal>

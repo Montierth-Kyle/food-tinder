@@ -94,7 +94,7 @@ class Account extends React.Component {
                     </Grid.Column>
                 </Grid >
                 <Divider hidden/>
-                <Button.Group>
+                <Button.Group size='massive'>
                     <Button {...this.state.show === "Cooked" ? { positive } : '' } onClick={() => this.setState({ show: 'Cooked' })}>Cooked</Button>
                     <Button.Or />
                     <Button {...this.state.show === "Saved" ? { positive } : '' } onClick={() => this.setState({ show: 'Saved' })}>Saved</Button>

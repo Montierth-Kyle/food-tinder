@@ -7,6 +7,22 @@
   padding-top: 40px;
 }
 
-.NavLink {
-  
+.background {
+  background-image: '../images/mosaic_bg_medium.jpg';
+}
+
+.startGameText, .accountText, .dietPrefsDropdown {
+  z-index: 1;
+  position: absolute;
+}
+
+.startGameText, .accountText {
+  font-size: 175px !important;
+  top: 50%;
+}
+
+.dietPrefsDropdown {
+    font-size: 75px !important;
+      top: 70%;
+    
 }

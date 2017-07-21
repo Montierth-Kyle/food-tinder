@@ -1,12 +1,14 @@
 import React from 'react';
-import { Modal, Button, Dropdown, Grid, Container, Card } from 'semantic-ui-react';
+import { Modal, Button, Dropdown, Grid, Container, Card, Image, Header, Segment } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import { getDietPreference, setDietPreference } from '../actions/dietPreference';
 import Account from './Account';
 import Game from './Game';
 import { getRecipe } from '../actions/recipe';
-import NavBar from './NavBar';
+import gameButtonImage from '../images/gameButtonImage.jpg';
+import accountButtonImage from '../images/accountButtonImage.jpg'
+
 
 
 class Dashboard extends React.Component {
@@ -24,7 +26,9 @@ class Dashboard extends React.Component {
   }
 
   showHistory = () => {
+    let history = this.props;
     this.setState({ viewHistory: true })
+
   }
 
   displayDietPreferences = () => {
@@ -40,6 +44,9 @@ class Dashboard extends React.Component {
 
 
   render() {
+
+    const square = { width: 175, height: 175 }
+
     if (this.state.gameStarted && !this.state.viewHistory ) {
       return (
         <Game id={this.state.value} />
@@ -47,25 +54,54 @@ class Dashboard extends React.Component {
     } else if (this.state.viewHistory && !this.state.gameStarted ) {
         return (
           <Container>
-            <NavBar/>
             <Account/>
           </Container>
       );
     } else {
         return (
-          <Container>
-            <Grid columns={2}>
+            <Grid columns={1}>
               <Grid.Column>
-                <Button inverted color='orange' onClick={this.startGame} >Start Game</Button>
-                <Dropdown placeholder='Diet Preferences' value={this.state.value} fluid selection options={this.displayDietPreferences()} onChange={this.handleChange} />
-              </Grid.Column>
-              <Grid.Column>
-                <Link to='/account'>
+                <Card fluid>
+                  <Image 
+                    src={gameButtonImage}
+                    as='a'
+                    href='/game'
+                    fluid 
+                    onClick={this.startGame}
+                  />
+                  <div>
+                  <Header as='h1' className='startGameText' inverted >In The Mood?</Header>
+                  </div>
+                  <Header as='h3' className='dietPrefsDropdown' inverted>
+                    <Header.Content>
+                      Diet Preference: {' '}
+                      <Dropdown
+                        upward
+                        inline
+                        header='Diet Preferences'
+                        value={this.state.value}
+                        options={this.displayDietPreferences()}
+                        onChange={this.handleChange}
+                      />
+                    </Header.Content>
+                  </Header>
+                </Card>
+                <Card fluid>
+                  <Image
+                    src={accountButtonImage}
+                    as='a'
+                    href='/account'
+                    fluid
+                  />
+                  <div>
+                    <Header as='h1' className='accountText' inverted >My Account</Header>
+                  </div>
+                </Card>
+                {/*<Link to='/account'>
                   <Button color='red'>History</Button>
-                </Link>
+                </Link>*/}
               </Grid.Column>
             </Grid>
-          </Container>
       );
     }
   };
