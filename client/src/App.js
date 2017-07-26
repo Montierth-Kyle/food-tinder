@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import { Image } from 'semantic-ui-react';
 import About from './components/About';
 import Account from './components/Account';
+import Game from './components/Game';
 import Auth from './components/Auth';
 import NavBar from './components/NavBar';
 import Login from './components/Login';
@@ -17,6 +18,7 @@ const App = () => (
       <Switch>
         <ProtectedRoute path="/dashboard" component={Dashboard} />
         <ProtectedRoute path="/account" component={Account} />
+        <ProtectedRoute path="/game" component={Game} />
         {/*<ProtectedRoute path="/account" render={ (props) => <Account {...props} title="My Account" /> } />*/}
         <Route exact path="/" render={ (props) => <Login {...props} title="FOODMOOD" /> } />
         <Route path="/about" component={About} />

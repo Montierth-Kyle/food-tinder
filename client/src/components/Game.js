@@ -1,9 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Card, Container, Segment, Loader, Dimmer, Grid, Button, Icon } from 'semantic-ui-react';
+import { Card, Container, Segment, Loader, Dimmer, Grid, Button, Icon, Image, Progress } from 'semantic-ui-react';
 import { getRecipes } from '../actions/recipe'
 import axios from 'axios';
+import background from '../images/background.jpg';
 
+var sectionStyle = {
+    width: "100%",
+    height: "100%",
+    position: 'fixed',
+    top: '0',
+    left: '0'
+};
 
 class Game extends React.Component {
     state = { loading: true, sidebyside: false, recipes: [], matchedRecipes: [] }
@@ -40,9 +48,9 @@ class Game extends React.Component {
     }
 
     gameLoading = () => (
-        <Segment>
+        <Segment size='massive' style={sectionStyle}>
             <Dimmer active>
-                <Loader active inline='centered' indeterminate>Preparing Files</Loader>
+                <Loader active inline='centered' indeterminate>Setting The Mood</Loader>
             </Dimmer>
         </Segment>
     );
@@ -50,24 +58,55 @@ class Game extends React.Component {
     yesNoGame = () => (
         <Container>
             { this.state.recipes.length > 0 && 
-                <Grid centered columns={2}>
+                <Grid centered columns={1}>
                     <Grid.Column>
-                        <Card
-                            header={this.state.recipes[0].recipeName} 
-                        /> 
+                        <Card fluid raised>
+                        <Image height='650px' src={this.state.recipes[0].smallImageUrls[0]+0} />
+                        <Card.Content>
+                            <Card.Header>{this.state.recipes[0].recipeName}</Card.Header>
+                        </Card.Content>
+                        <Card.Description>
+                            {this.state.recipes[0].flavors != null &&
+                            <Grid centered columns={6}>
+                                <Grid.Column>
+                                    Piquant
+                                    <Progress percent={(this.state.recipes[0].flavors.piquant) * 100} indicating />
+                                </Grid.Column>
+                                <Grid.Column>
+                                    Meaty
+                                    <Progress percent={(this.state.recipes[0].flavors.meaty) * 100} indicating />
+                                </Grid.Column>
+                                <Grid.Column>
+                                    Bitter
+                                    <Progress percent={(this.state.recipes[0].flavors.bitter) * 100} indicating />
+                                </Grid.Column>
+                                <Grid.Column>
+                                    Sweet
+                                    <Progress percent={(this.state.recipes[0].flavors.sweet) * 100} indicating />
+                                </Grid.Column>
+                                <Grid.Column>
+                                    Sour
+                                    <Progress percent={(this.state.recipes[0].flavors.sour) * 100} indicating />
+                                </Grid.Column>
+                                <Grid.Column>
+                                    Salty
+                                    <Progress percent={(this.state.recipes[0].flavors.salty) * 100} indicating />
+                                </Grid.Column>
+                            </Grid>
+                            }   
+                        </Card.Description>
+                        <Card.Content extra>
+                            <div className='ui two buttons'>
+                                <Button size='massive' color='green' icon onClick={this.addRecipeToMatched}>
+                                    <Icon name='thumbs outline up' />
+                                </Button>
+                                <Button size='massive' color='red' icon onClick={this.removeRecipe}>
+                                    <Icon name='thumbs outline down' />
+                                </Button>
+                            </div>
+                        </Card.Content>
+                        </Card> 
                     </Grid.Column>
-                    <Grid.Row>
-                        <Grid.Column>
-                            <Button size='massive' color='green' icon onClick={this.addRecipeToMatched}>
-                                <Icon name='thumbs outline up' />
-                            </Button>
-                        </Grid.Column>
-                        <Grid.Column>
-                            <Button size='massive' color='red' icon onClick={this.removeRecipe}>
-                                <Icon name='thumbs outline down' />
-                            </Button>
-                        </Grid.Column>
-                    </Grid.Row>
                 </Grid>
             }   
         </Container>
@@ -78,36 +117,38 @@ class Game extends React.Component {
         return (
             <Container>
                 { this.state.matchedRecipes.length > 0 &&
-                <Grid>
-                    <Grid.Row>
-                        <Grid.Column>
-                            <Card
-                                header={this.state.matchedRecipes[0].recipeName} 
-                            /> 
-                        </Grid.Column>
-                        <Grid.Column>
-                            <Card
-                                header={this.state.matchedRecipes[1].recipeName} 
-                            /> 
-                        </Grid.Column>
-                    </Grid.Row>
-                    <Grid.Row>
-                        <Grid.Column>
-                            <Button />
-                        </Grid.Column>
-                        <Grid.Column>
-                            <Button />
-                        </Grid.Column>
-                    </Grid.Row>
+                <Grid centered columns={2}>
+                    <Grid.Column>
+                        <Card fluid raised>
+                            <Image height='auto' src={this.state.matchedRecipes[0].smallImageUrls[0]+0} />
+                            <Card.Content>
+                                <Card.Header>{this.state.matchedRecipes[0].recipeName}</Card.Header>
+                            </Card.Content>
+                            <Card.Content extra>
+                                <Button fluid size='massive' color='yellow' icon onClick={this.addRecipeToMatched}>
+                                    <Icon name='star' />
+                                </Button>
+                            </Card.Content>
+                        </Card> 
+                    </Grid.Column>
+                    <Grid.Column>
+                        <Card fluid>
+                            <Image height='auto' src={this.state.matchedRecipes[1].smallImageUrls[0]+0} />
+                            <Card.Content>
+                                <Card.Header>{this.state.matchedRecipes[1].recipeName}</Card.Header>
+                            </Card.Content>
+                            <Card.Content extra>
+                                <Button fluid size='massive' color='yellow' icon onClick={this.addRecipeToMatched}>
+                                    <Icon name='star' />
+                                </Button>
+                            </Card.Content>
+                        </Card> 
+                    </Grid.Column>
                 </Grid>
                 }
             </Container>
         )
     }
-
-
-
-
 
     whatToShow = () => {
         let { loading, sidebyside } = this.state;

@@ -10,6 +10,8 @@ var sectionStyle = {
     width: "100%",
     height: "100%",
     backgroundImage: `url(${background})`,
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover',
     position: 'fixed',
     top: '0',
     left: '0'
@@ -70,8 +72,8 @@ class Login extends React.Component {
                             <Divider hidden />
                             <Button circular size='big' color='facebook' icon='facebook' />
                             <Button circular size='big' color='twitter' icon='twitter' />
-                            <Button circular size='big' color='google plus' icon='google plus' />
-                            <Button circular size='big' color='linkedin' icon='linkedin' />
+                            <Button circular size='big' color='google plus' icon='google' />
+                            <Button circular size='big' color='steam' icon='steam' />
                         </Form>
                     </Grid.Column>
                     <Grid.Column width={1}>

@@ -9,6 +9,8 @@ var sectionStyle = {
   width: "100%",
   height: "100%",
   backgroundImage: `url(${background})`,
+  backgroundRepeat: 'no-repeat',
+  backgroundSize: 'cover',
   position: 'fixed',
   top: '0',
   left: '0'
