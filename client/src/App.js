@@ -13,7 +13,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 
 const App = () => (
   <div className='background'>
-    <NavBar />
+    <NavBar className="Nav" />
     <FetchUser>
       <Switch>
         <ProtectedRoute path="/dashboard" component={Dashboard} />
