@@ -1,9 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Card, Container, Segment, Loader, Dimmer, Grid, Button, Icon, Image, Progress } from 'semantic-ui-react';
-import { getRecipes } from '../actions/recipe'
 import axios from 'axios';
-import background from '../images/background.jpg';
 
 var sectionStyle = {
     width: "100%",
@@ -116,7 +114,7 @@ class Game extends React.Component {
         let matchedRecipes = this.state.matchedRecipes;
         return (
             <Container>
-                { this.state.matchedRecipes.length > 0 &&
+                { matchedRecipes.length > 0 &&
                 <Grid centered columns={2}>
                     <Grid.Column>
                         <Card fluid raised>
@@ -153,14 +151,13 @@ class Game extends React.Component {
     whatToShow = () => {
         let { loading, sidebyside } = this.state;
 
-        {   if(loading && sidebyside === false) {
+            if (loading && sidebyside === false) {
                 return this.gameLoading()
-            }else if(loading === false && sidebyside === false) {
+            }else if (loading === false && sidebyside === false) {
                 return this.yesNoGame()
             }else 
                 return this.sideBySideGame()
         }
-    }
 
     mixItUp = (array) => {
         var currentIndex = array.length, temporaryValue, randomIndex;
@@ -183,12 +180,11 @@ class Game extends React.Component {
 
     shuffle = () => {
         let matchedRecipes = this.state.matchedRecipes;
-        matchedRecipes = this.mixItUp(matchedRecipes)
+        this.state.matchedRecipes = this.mixItUp(matchedRecipes)
         this.setState({ matchedRecipes: this.state.matchedRecipes })
     }
 
     render() {
-        let { loading, sidebyside } = this.state;
         return (
             <div>
                 { this.whatToShow() }

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { Image } from 'semantic-ui-react';
 import About from './components/About';
 import Account from './components/Account';
 import Game from './components/Game';

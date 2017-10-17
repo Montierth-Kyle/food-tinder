@@ -1,11 +1,9 @@
 import React from 'react';
-import { Modal, Button, Dropdown, Grid, Container, Card, Image, Header, Segment } from 'semantic-ui-react';
+import { Dropdown, Grid, Container, Card, Image, Header } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import { NavLink, Link } from 'react-router-dom';
 import { getDietPreference, setDietPreference } from '../actions/dietPreference';
 import Account from './Account';
 import Game from './Game';
-import { getRecipe } from '../actions/recipe';
 import gameButtonImage from '../images/gameButtonImage.jpg';
 import accountButtonImage from '../images/accountButtonImage.jpg'
 
@@ -17,7 +15,7 @@ class Dashboard extends React.Component {
   state = { ...this.defaults }
 
   componentDidMount() {
-    let { dietPreference, dispatch } = this.props;
+    let { dispatch } = this.props;
       dispatch(getDietPreference());
   }
 
@@ -26,7 +24,6 @@ class Dashboard extends React.Component {
   }
 
   showHistory = () => {
-    let history = this.props;
     this.setState({ viewHistory: true })
 
   }
@@ -44,8 +41,6 @@ class Dashboard extends React.Component {
 
 
   render() {
-
-    const square = { width: 175, height: 175 }
 
     if (this.state.gameStarted && !this.state.viewHistory ) {
       return (

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header, Form, Button, Grid, Icon, Divider, Menu, Modal, Image } from 'semantic-ui-react';
+import { Header, Form, Button, Grid, Icon, Divider, Menu, Modal } from 'semantic-ui-react';
 import { authenticate } from '../actions/user';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';

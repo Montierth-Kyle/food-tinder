@@ -1,8 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Card, Container, Divider, List, Grid, Button, Image, Icon, Label } from 'semantic-ui-react';
-import { getRecipes, getOneRecipe, deleteRecipe } from '../actions/recipe'
-import NavBar from './NavBar';
+import { Card, Container, Divider, List, Grid, Button, Image, Icon } from 'semantic-ui-react';
+import { getRecipes, deleteRecipe } from '../actions/recipe';
 
 
 class Account extends React.Component {
@@ -20,7 +19,7 @@ class Account extends React.Component {
         const cardLabelColor = this.state.show === 'Cooked' ? 'red' : 'teal'
         const cardLabelIcon = this.state.show === 'Cooked' ? 'spoon' : 'star'
         let { show } = this.state;
-        let { recipes, dispatch, id } = this.props;
+        let { recipes } = this.props;
         let cookedRecipes = recipes.filter(recipe => recipe.cooked === true);
         let savedRecipes = recipes.filter(recipe => recipe.superSave === true);
         let filtered = this.state.show === 'Cooked' ? cookedRecipes : savedRecipes;
@@ -60,8 +59,8 @@ class Account extends React.Component {
     }
 
     render() {
-        let { user, dispatch, id } = this.props;
-        let { positive, disabled } = this.state;
+        let { user } = this.props;
+        let { positive } = this.state;
         return (
             <div>
             <Container>
